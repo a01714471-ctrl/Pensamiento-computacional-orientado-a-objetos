@@ -2,11 +2,11 @@
 Este proyecto es un sistema básico de modelado de elementos de basketball usando Programación Orientada a Objetos en C++.
 Permite crear y manejar tres tipos de objetos:
 
-Jugador (Player)
+Jugador
 
-Equipo (Team)
+Equipo
 
-Pelota (Ball)
+Balon
 
 Cada clase tiene atributos privados, constructor, getters, setters y un método para mostrar la información del objeto (showInfo() o showTeam()).
 
