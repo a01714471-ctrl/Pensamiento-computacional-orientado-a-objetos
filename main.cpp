@@ -19,7 +19,7 @@ int main() {
     // Modificar algunos atributos
     jugador.setName("LeBron James");
     equipo.setTeamName("Los Angeles Lakers");
-    pelota.setMaterial("sintético");
+    pelota.setMaterial("sintetico");
 
     cout << "\nINFORMACION MODIFICADA\n";
     jugador.showInfo();
