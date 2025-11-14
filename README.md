@@ -1,5 +1,4 @@
 #PROYECTO: Gestor Básico de Basketball
-
 Este proyecto es un sistema básico para modelar elementos del basketball utilizando Programación Orientada a Objetos en C++.
 El objetivo principal es practicar la creación y uso de clases, atributos, métodos y objetos, manteniendo un proyecto sencillo y fácil de extender.
 
