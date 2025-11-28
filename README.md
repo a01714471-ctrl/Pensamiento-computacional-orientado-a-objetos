@@ -68,3 +68,44 @@ Representa una conferencia de la liga, base de EastConference y WestConference.
   - name (string): nombre de la conferencia.
   - region (string): región geográfica.
   - teams (array de Team): equipos en la conferencia.
+- **Métodos**:
+  - addTeam(Team t): agrega un equipo.
+  - showInfo(): muestra información de la conferencia y sus equipos.
+
+### Clase EastConference / WestConference
+Hereda de Conference y agrega:
+
+- **Atributos**:
+  - conferenceId (int): ID de la conferencia.
+  - maxTeams (int): máximo de equipos permitidos.
+- **Métodos**:
+  - showInfo(): muestra información adicional del ID y límite de equipos, luego llama a Conference::showInfo().
+
+### Clase League
+Representa la liga de baloncesto.
+
+- **Atributos**:
+  - leagueName (string): nombre de la liga.
+  - year (int): año de la liga.
+  - east (EastConference): conferencia del este.
+  - west (WestConference): conferencia del oeste.
+- **Métodos**:
+  - setEast(EastConference e), setWest(WestConference w): asigna las conferencias.
+  - showInfo(): muestra información de la liga y sus conferencias.
+
+
+## Qué hace el programa
+
+- Permite **crear jugadores y un coach de manera dinámica**.
+- Permite **crear un equipo** y asignarle jugadores y coach.
+- Permite **crear conferencias** y agregar equipos a ellas.
+- Permite **crear una liga** y asignar las conferencias.
+- Muestra información de cada entidad y simula que el balón rebota.
+
+
+## Limitaciones
+
+- Número máximo: 100 jugadores por equipo y 100 equipos por conferencia.
+- Los datos deben ser creados **desde el código**; no hay entrada de usuario ni persistencia.
+- No valida datos duplicados o erróneos.
+- Implementación en headers; no está separada en .cpp.
