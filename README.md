@@ -61,7 +61,7 @@ Representa un equipo de baloncesto.
   - setCoach(Coach c): asigna un coach.
   - showInfo(): muestra información completa del equipo, incluyendo jugadores, coach y pelota.
 
-### Clase `Conference`
+### Clase Conference
 Representa una conferencia de la liga, base de EastConference y WestConference.
 
 - **Atributos**:
