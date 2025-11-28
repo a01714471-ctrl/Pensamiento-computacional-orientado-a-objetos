@@ -1,52 +1,71 @@
-# PROYECTO: Gestor Básico de Basketball
-Este proyecto es un sistema básico de modelado de elementos de basketball usando Programación Orientada a Objetos en C++.
-Permite crear y manejar tres tipos de objetos:
+# Proyecto: Basketball C++
 
-Jugador
+## Descripción
+Este proyecto es una simulación básica de un sistema de gestión de equipos de baloncesto, implementado en C++ usando programación orientada a objetos.  
 
-Equipo
+Permite crear jugadores, entrenadores, equipos, conferencias y una liga, y mostrar información de todos ellos, así como simular acciones sencillas de la pelota.
 
-Balon
+---
 
-Cada clase tiene atributos privados, constructor, getters, setters y un método para mostrar la información del objeto (showInfo() o showTeam()).
+## Estructura de Clases
 
-El proyecto está diseñado para practicar POO y preparar futuras extensiones, manteniéndose simple y fácil de modificar.
+### Clase `Person`
+Clase base para `Player` y `Coach`.
 
-# Objetivo del Programa
-El programa permite:
+- **Atributos**:
+  - `name` (string): nombre de la persona.
+  - `age` (int): edad de la persona.
+- **Métodos**:
+  - `showInfo()`: muestra la información de la persona.
 
-Crear objetos de tipo Jugador, Equipo y Pelota.
+### Clase `Player` : hereda de `Person`
+Representa a un jugador de baloncesto.
 
-Mostrar información de cada objeto.
+- **Atributos**:
+  - `position` (string): posición en la cancha.
+  - `number` (int): número del jugador.
+  - `height` (float): altura en metros.
+- **Métodos**:
+  - `showInfo()`: muestra nombre, número, posición y altura.
 
-Modificar atributos usando setters.
+### Clase `Coach` : hereda de `Person`
+Representa al entrenador de un equipo.
 
-Comprobar cambios mostrando la información nuevamente.
+- **Atributos**:
+  - `experienceYears` (int): años de experiencia.
+  - `specialty` (string): área de especialidad.
+- **Métodos**:
+  - `showInfo()`: muestra nombre, años de experiencia y especialidad.
 
-# ¿Cómo se usa?
-En esta versión inicial:
+### Clase `Ball`
+Representa la pelota de baloncesto asociada a un equipo.
 
-Compilar y ejecutar el archivo main.cpp.
+- **Atributos**:
+  - `brand` (string): marca de la pelota.
+  - `color` (string): color de la pelota.
+  - `size` (float): tamaño de la pelota.
+- **Métodos**:
+  - `showInfo()`: muestra información de la pelota.
+  - `bounce()`: simula un rebote de la pelota.
 
-Observar en consola la información inicial de cada objeto.
+### Clase `Team`
+Representa un equipo de baloncesto.
 
-Ver cómo se modifican atributos con setters y cómo se muestran los cambios.
+- **Atributos**:
+  - `teamName` (string): nombre del equipo.
+  - `city` (string): ciudad del equipo.
+  - `players` (array de `Player`): jugadores del equipo.
+  - `coach` (`Coach`): entrenador del equipo.
+  - `ball` (`Ball`): pelota del equipo.
+- **Métodos**:
+  - `addPlayer(Player p)`: agrega un jugador.
+  - `setCoach(Coach c)`: asigna un coach.
+  - `showInfo()`: muestra información completa del equipo, incluyendo jugadores, coach y pelota.
 
-# Clases del Proyecto
-Jugador
+### Clase `Conference`
+Representa una conferencia de la liga, base de `EastConference` y `WestConference`.
 
-Atributos: nombre, número, altura
-
-Métodos: constructor, getters, setters, showInfo()
-
-Equipo
-
-Atributos: nombre del equipo, ciudad
-
-Métodos: constructor, getters, setters, showTeam()
-
-Balon
-
-Atributos: tamaño, material
-
-Métodos: constructor, getters, setters, showInfo()
+- **Atributos**:
+  - `name` (string): nombre de la conferencia.
+  - `region` (string): región geográfica.
+  - `teams` (array de `Team`): equipos en la conferencia.
