@@ -2,76 +2,74 @@
 #define BALL_H
 
 #include <iostream>
-#include <string>
-
 using namespace std;
 
 class Ball {
 private:
-    string brand;
-    string color;
-    float size;
-
+    string marca;
+    float tamano;
 public:
     Ball();
-    Ball(string b, string c, float s);
-
-    void setBrand(string b);
-    void setColor(string c);
-    void setSize(float s);
-
-    string getBrand();
-    string getColor();
-    float getSize();
-
-    void bounce();
-    void showInfo();
+    Ball(string m, float t);
+    string getMarca();
+    void setMarca(string m);
+    float getTamano();
+    void setTamano(float t);
+    void rebotar();
+    string toString();
 };
 
-//Métodos
+// Métodos
 
 Ball::Ball() {
-    brand = "";
-    color = "";
-    size = 0.0f;
+    marca = "Generica";
+    tamano = 0.0f;
 }
 
-Ball::Ball(string b, string c, float s) {
-    brand = b;
-    color = c;
-    size = s;
+Ball::Ball(string m, float t) {
+    if (m != "") {
+        marca = m;
+    } else {
+        marca = "Generica";
+    }
+
+    if (t > 0) {
+        tamano = t;
+    } else {
+        tamano = 0.0f;
+    }
 }
 
-void Ball::setBrand(string b) {
-    brand = b;
+string Ball::getMarca() {
+    return marca;
 }
 
-void Ball::setColor(string c) {
-    color = c;
+void Ball::setMarca(string m) {
+    if (m != "") {
+        marca = m;
+    } else {
+        marca = "Generica";
+    }
 }
 
-void Ball::setSize(float s) {
-    size = s;
+float Ball::getTamano() {
+    return tamano;
 }
 
-string Ball::getBrand() {
-    return brand;
+void Ball::setTamano(float t) {
+    if (t > 0) {
+        tamano = t;
+    } else {
+        tamano = 0.0f;
+    }
 }
 
-string Ball::getColor() {
-    return color;
+void Ball::rebotar() {
+    cout << "El balon de marca " << marca << " rebota con fuerza!" << endl;
 }
 
-float Ball::getSize() {
-    return size;
+string Ball::toString() {
+    return "Balon:  Marca " + marca + " Tamanio " + to_string(tamano);
 }
 
-void Ball::bounce() {
-    cout << "El balon (" << brand << ") bota" << endl;
-}
-
-void Ball::showInfo() {
-    cout << "Balon: " << brand << ", Color: " << color << ", Tamanio: " << size << endl;
-}
-
-#endif // BALL_H
+#endif

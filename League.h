@@ -1,80 +1,158 @@
 #ifndef LEAGUE_H
 #define LEAGUE_H
 
-#include <iostream>
-#include <string>
-
-using namespace std;
-
 #include "Conference.h"
 
 class League {
 private:
-    string leagueName;
-    int year;
-    EastConference east;
-    WestConference west;
-    bool hasEast;
-    bool hasWest;
-
+    string nombreLiga;
+    int anio;
+    Conference conferencias[2];
+    int cantidadConferencias;
 public:
     League();
-    League(string n, int y);
-    void setLeagueName(string n);
-    string getLeagueName();
-    void setYear(int y);
-    int getYear();
-    void setEast(EastConference e);
-    void setWest(WestConference w);
-    void showInfo();
+    League(string nombre, int a);
+    string getNombreLiga();
+    void setNombreLiga(string nombre);
+    int getAnio();
+    void setAnio(int a);
+    void agregarConferencia(Conference c);
+    void eliminarConferencia(int posicionConferencia);
+    Conference getConferencia(int posicionConferencia);
+    int getCantidadConferencias();
+    void agregarEquipoEnConferencia(int posicionConferencia, Team equipo);
+    void eliminarEquipoEnConferencia(int posicionConferencia, int posicionEquipo);
+    void agregarJugadorEnEquipo(int posicionConferencia, int posicionEquipo, Player jugador);
+    void eliminarJugadorEnEquipo(int posicionConferencia, int posicionEquipo, int posicionJugador);
+    string toString();
 };
 
-//Métodos
+// Métodos
 
 League::League() {
-    leagueName = "";
-    year = 0;
-    hasEast = false;
-    hasWest = false;
+    nombreLiga = "Sin nombre";
+    anio = 0;
+    cantidadConferencias = 0;
 }
 
-League::League(string n, int y) {
-    leagueName = n;
-    year = y;
-    hasEast = false;
-    hasWest = false;
+League::League(string nombre, int a) {
+    if (nombre != "") {
+        nombreLiga = nombre;
+    } else {
+        nombreLiga = "Sin nombre";
+    }
+
+    if (a >= 0) {
+        anio = a;
+    } else {
+        anio = 0;
+    }
+
+    cantidadConferencias = 0;
 }
 
-void League::setLeagueName(string n) {
-    leagueName = n;
+string League::getNombreLiga() {
+    return nombreLiga;
 }
 
-string League::getLeagueName() {
-    return leagueName;
+void League::setNombreLiga(string nombre) {
+    if (nombre != "") {
+        nombreLiga = nombre;
+    } else {
+        nombreLiga = "Sin nombre";
+    }
 }
 
-void League::setYear(int y) {
-    year = y;
+int League::getAnio() {
+    return anio;
 }
 
-int League::getYear() {
-    return year;
+void League::setAnio(int a) {
+    if (a >= 0) {
+        anio = a;
+    } else {
+        anio = 0;
+    }
 }
 
-void League::setEast(EastConference e) {
-    east = e;
-    hasEast = true;
+void League::agregarConferencia(Conference c) {
+    if (cantidadConferencias < 2) {
+        conferencias[cantidadConferencias] = c;
+        cantidadConferencias++;
+        cout << "Conferencia agregada correctamente." << endl;
+    } else {
+        cout << "No se pueden agregar mas conferencias. Limite alcanzado (2)." << endl;
+    }
 }
 
-void League::setWest(WestConference w) {
-    west = w;
-    hasWest = true;
+void League::eliminarConferencia(int posicionConferencia) {
+    if (posicionConferencia >= 0 && posicionConferencia < cantidadConferencias) {
+        for (int i = posicionConferencia; i < cantidadConferencias - 1; i++) {
+            conferencias[i] = conferencias[i + 1];
+        }
+        cantidadConferencias--;
+        cout << "Conferencia eliminada correctamente." << endl;
+    } else {
+        cout << "Posicion invalida. No se elimino ninguna conferencia." << endl;
+    }
 }
 
-void League::showInfo() {
-    cout << "Liga: " << leagueName << " (" << year << ")" << endl;
-    if (hasEast) east.showInfo();
-    if (hasWest) west.showInfo();
+Conference League::getConferencia(int posicionConferencia) {
+    if (posicionConferencia >= 0 && posicionConferencia < cantidadConferencias) {
+        return conferencias[posicionConferencia];
+    } else {
+        cout << "Posicion invalida. Se devuelve una conferencia vacia." << endl;
+        return Conference();
+    }
 }
 
-#endif // LEAGUE_H
+int League::getCantidadConferencias() {
+    return cantidadConferencias;
+}
+
+void League::agregarEquipoEnConferencia(int posicionConferencia, Team equipo) {
+    if (posicionConferencia >= 0 && posicionConferencia < cantidadConferencias) {
+        conferencias[posicionConferencia].agregarEquipo(equipo);
+    } else {
+        cout << "Posicion de conferencia invalida. No se agrego el equipo." << endl;
+    }
+}
+
+void League::eliminarEquipoEnConferencia(int posicionConferencia, int posicionEquipo) {
+    if (posicionConferencia >= 0 && posicionConferencia < cantidadConferencias) {
+        conferencias[posicionConferencia].eliminarEquipo(posicionEquipo);
+    } else {
+        cout << "Posicion de conferencia invalida. No se elimino el equipo." << endl;
+    }
+}
+
+void League::agregarJugadorEnEquipo(int posicionConferencia, int posicionEquipo, Player jugador) {
+    if (posicionConferencia >= 0 && posicionConferencia < cantidadConferencias) {
+        conferencias[posicionConferencia].agregarJugadorEnEquipo(posicionEquipo, jugador);
+    } else {
+        cout << "Posicion de conferencia invalida. No se agrego el jugador." << endl;
+    }
+}
+
+void League::eliminarJugadorEnEquipo(int posicionConferencia, int posicionEquipo, int posicionJugador) {
+    if (posicionConferencia >= 0 && posicionConferencia < cantidadConferencias) {
+        conferencias[posicionConferencia].eliminarJugadorEnEquipo(posicionEquipo, posicionJugador);
+    } else {
+        cout << "Posicion de conferencia invalida. No se elimino el jugador." << endl;
+    }
+}
+
+string League::toString() {
+    string info = "Liga: " + nombreLiga + " Anio: " + to_string(anio) + "\n";
+    if (cantidadConferencias == 0) {
+        info += "No hay conferencias registradas.\n";
+    } else {
+        info += "Conferencias:\n";
+        for (int i = 0; i < cantidadConferencias; i++) {
+            info += conferencias[i].toString() + "\n";
+        }
+    }
+    return info;
+}
+
+#endif

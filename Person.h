@@ -2,165 +2,195 @@
 #define PERSON_H
 
 #include <iostream>
-#include <string>
-
 using namespace std;
 
 class Person {
 protected:
-    string name;
-    int age;
-
+    string nombre;
+    int edad;
 public:
     Person();
-    Person(string n, int a);
-    string getName();
-    int getAge();
-    void setName(string n);
-    void setAge(int a);
-    void showInfo();
+    Person(string n, int e);
+    string getNombre();
+    void setNombre(string n);
+    int getEdad();
+    void setEdad(int e);
+    string toString();
 };
 
-// Hijas dentro del mismo header: Player y Coach
 class Player : public Person {
 private:
-    string position;
-    int number;
-    float height;
-
+    string posicion;
+    int numero;
 public:
     Player();
-    Player(string n, int num, float h, string pos);
-    string getPosition();
-    int getNumber();
-    float getHeight();
-    void setPosition(string p);
-    void setNumber(int num);
-    void setHeight(float h);
-    void showInfo();
+    Player(string n, int e, string pos, int num);
+    string getPosicion();
+    void setPosicion(string p);
+    int getNumero();
+    void setNumero(int n);
+    string toString();
 };
 
 class Coach : public Person {
 private:
-    int experienceYears;
-    string specialty;
-
+    int aniosExperiencia;
+    string especialidad;
 public:
     Coach();
-    Coach(string n, int a, int exp, string spec);
-    int getExperienceYears();
-    string getSpecialty();
-    void setExperienceYears(int e);
-    void setSpecialty(string s);
-    void showInfo();
+    Coach(string n, int e, int exp, string esp);
+    int getAniosExperiencia();
+    void setAniosExperiencia(int a);
+    string getEspecialidad();
+    void setEspecialidad(string s);
+    string toString();
 };
 
-//Métodos
+// Métodos
 
-// Persona
 Person::Person() {
-    name = "";
-    age = 0;
+    nombre = "Desconocido";
+    edad = 0;
 }
 
-Person::Person(string n, int a) {
-    name = n;
-    age = a;
+Person::Person(string n, int e) {
+    if (n != "") {
+        nombre = n;
+    } else {
+        nombre = "Desconocido";
+    }
+
+    if (e >= 0) {
+        edad = e;
+    } else {
+        edad = 0;
+    }
 }
 
-string Person::getName() {
-    return name;
+string Person::getNombre() {
+    return nombre;
 }
 
-int Person::getAge() {
-    return age;
+void Person::setNombre(string n) {
+    if (n != "") {
+        nombre = n;
+    } else {
+        nombre = "Desconocido";
+    }
 }
 
-void Person::setName(string n) {
-    name = n;
+int Person::getEdad() {
+    return edad;
 }
 
-void Person::setAge(int a) {
-    age = a;
+void Person::setEdad(int e) {
+    if (e >= 0) {
+        edad = e;
+    } else {
+        edad = 0;
+    }
 }
 
-void Person::showInfo() {
-    cout << "Persona: " << name << " (Edad: " << age << ")" << endl;
+string Person::toString() {
+    return "Nombre: " + nombre + " Edad: " + to_string(edad);
 }
 
 // Jugador
+
 Player::Player() : Person() {
-    position = "";
-    number = 0;
-    height = 0.0f;
+    posicion = "Sin posicion";
+    numero = 0;
 }
 
-Player::Player(string n, int num, float h, string pos) : Person(n, 0) {
-    number = num;
-    height = h;
-    position = pos;
+Player::Player(string n, int e, string pos, int num) : Person(n, e) {
+    if (pos != "") {
+        posicion = pos;
+    } else {
+        posicion = "Sin posicion";
+    }
+
+    if (num >= 0) {
+        numero = num;
+    } else {
+        numero = 0;
+    }
 }
 
-string Player::getPosition() {
-    return position;
+string Player::getPosicion() {
+    return posicion;
 }
 
-int Player::getNumber() {
-    return number;
+void Player::setPosicion(string p) {
+    if (p != "") {
+        posicion = p;
+    } else {
+        posicion = "Sin posicion";
+    }
 }
 
-float Player::getHeight() {
-    return height;
+int Player::getNumero() {
+    return numero;
 }
 
-void Player::setPosition(string p) {
-    position = p;
+void Player::setNumero(int n) {
+    if (n >= 0) {
+        numero = n;
+    } else {
+        numero = 0;
+    }
 }
 
-void Player::setNumber(int num) {
-    number = num;
-}
-
-void Player::setHeight(float h) {
-    height = h;
-}
-
-void Player::showInfo() {
-    cout << "Jugador: " << name << " #" << number
-         << " Pos: " << position
-         << " Altura: " << height << endl;
+string Player::toString() {
+    return Person::toString() + " Posicion: " + posicion + " Numero: " + to_string(numero);
 }
 
 // Coach
+
 Coach::Coach() : Person() {
-    experienceYears = 0;
-    specialty = "";
+    aniosExperiencia = 0;
+    especialidad = "General";
 }
 
-Coach::Coach(string n, int a, int exp, string spec) : Person(n, a) {
-    experienceYears = exp;
-    specialty = spec;
+Coach::Coach(string n, int e, int exp, string esp) : Person(n, e) {
+    if (exp >= 0) {
+        aniosExperiencia = exp;
+    } else {
+        aniosExperiencia = 0;
+    }
+
+    if (esp != "") {
+        especialidad = esp;
+    } else {
+        especialidad = "General";
+    }
 }
 
-int Coach::getExperienceYears() {
-    return experienceYears;
+int Coach::getAniosExperiencia() {
+    return aniosExperiencia;
 }
 
-string Coach::getSpecialty() {
-    return specialty;
+void Coach::setAniosExperiencia(int a) {
+    if (a >= 0) {
+        aniosExperiencia = a;
+    } else {
+        aniosExperiencia = 0;
+    }
 }
 
-void Coach::setExperienceYears(int e) {
-    experienceYears = e;
+string Coach::getEspecialidad() {
+    return especialidad;
 }
 
-void Coach::setSpecialty(string s) {
-    specialty = s;
+void Coach::setEspecialidad(string s) {
+    if (s != "") {
+        especialidad = s;
+    } else {
+        especialidad = "General";
+    }
 }
 
-void Coach::showInfo() {
-    cout << "Coach: " << name << " (Exp: " << experienceYears
-         << " anios, " << specialty << ")" << endl;
+string Coach::toString() {
+    return Person::toString() + " Experiencia: " + to_string(aniosExperiencia) + " anios, Especialidad: " + especialidad;
 }
 
-#endif // PERSON_H
+#endif

@@ -1,197 +1,222 @@
 #ifndef CONFERENCE_H
 #define CONFERENCE_H
 
-#include <iostream>
-#include <string>
-
-using namespace std;
-
 #include "Team.h"
 
 class Conference {
 protected:
-    string name;
+    string nombre;
     string region;
-    Team teams[100];
-    int teamsCount;
-
+    Team equipos[15];
+    int cantidadEquipos;
 public:
     Conference();
     Conference(string n, string r);
-
-    void setName(string n);
-    string getName();
-    void setRegion(string r);
+    string getNombre();
+    void setNombre(string n);
     string getRegion();
-
-    bool addTeam(Team t); // agrega por copia
-    bool removeTeamByName(string teamName);
-    int getTeamsCount();
-    Team getTeamAt(int idx);
-
-    void showInfo();
+    void setRegion(string r);
+    void agregarEquipo(Team t);
+    void eliminarEquipo(int posicionEquipo);
+    Team getEquipo(int posicionEquipo);
+    int getCantidadEquipos();
+    void agregarJugadorEnEquipo(int posicionEquipo, Player jugador);
+    void eliminarJugadorEnEquipo(int posicionEquipo, int posicionJugador);
+    string toString();
 };
 
-// Hijas dentro del mismo header
 class EastConference : public Conference {
 private:
-    int conferenceId;
-    int maxTeams;
+    int idConferencia;
+    int maxEquipos;
 public:
     EastConference();
-    EastConference(int id, int maxT);
-
-    void setConferenceId(int id);
-    int getConferenceId();
-    void setMaxTeams(int m);
-    int getMaxTeams();
-
-    void showInfo();
+    EastConference(string n, string r, int id, int max);
+    int getIdConferencia();
+    void setIdConferencia(int id);
+    int getMaxEquipos();
+    void setMaxEquipos(int m);
 };
 
 class WestConference : public Conference {
 private:
-    int conferenceId;
-    int maxTeams;
+    int idConferencia;
+    int maxEquipos;
 public:
     WestConference();
-    WestConference(int id, int maxT);
-
-    void setConferenceId(int id);
-    int getConferenceId();
-    void setMaxTeams(int m);
-    int getMaxTeams();
-
-    void showInfo();
+    WestConference(string n, string r, int id, int max);
+    int getIdConferencia();
+    void setIdConferencia(int id);
+    int getMaxEquipos();
+    void setMaxEquipos(int m);
 };
 
-//Métodos
+// Métodos
 
 Conference::Conference() {
-    name = "";
-    region = "";
-    teamsCount = 0;
+    nombre = "Sin nombre";
+    region = "Sin region";
+    cantidadEquipos = 0;
 }
 
 Conference::Conference(string n, string r) {
-    name = n;
-    region = r;
-    teamsCount = 0;
+    if (n != "") {
+        nombre = n;
+    } else {
+        nombre = "Sin nombre";
+    }
+
+    if (r != "") {
+        region = r;
+    } else {
+        region = "Sin region";
+    }
+
+    cantidadEquipos = 0;
 }
 
-void Conference::setName(string n) {
-    name = n;
+string Conference::getNombre() {
+    return nombre;
 }
 
-string Conference::getName() {
-    return name;
-}
-
-void Conference::setRegion(string r) {
-    region = r;
+void Conference::setNombre(string n) {
+    if (n != "") {
+        nombre = n;
+    } else {
+        nombre = "Sin nombre";
+    }
 }
 
 string Conference::getRegion() {
     return region;
 }
 
-bool Conference::addTeam(Team t) {
-    if (teamsCount >= 100) return false;
-    teams[teamsCount] = t;
-    teamsCount++;
-    return true;
+void Conference::setRegion(string r) {
+    if (r != "") {
+        region = r;
+    } else {
+        region = "Sin region";
+    }
 }
 
-bool Conference::removeTeamByName(string teamName) {
-    for (int i = 0; i < teamsCount; i++) {
-        if (teams[i].getTeamName() == teamName) {
-            for (int j = i; j < teamsCount - 1; j++) teams[j] = teams[j+1];
-            teamsCount--;
-            return true;
+void Conference::agregarEquipo(Team t) {
+    if (cantidadEquipos < 15) {
+        equipos[cantidadEquipos] = t;
+        cantidadEquipos++;
+        cout << "Equipo agregado correctamente." << endl;
+    } else {
+        cout << "No se pueden agregar mas equipos. Limite alcanzado (15)." << endl;
+    }
+}
+
+void Conference::eliminarEquipo(int posicionEquipo) {
+    if (posicionEquipo >= 0 && posicionEquipo < cantidadEquipos) {
+        for (int i = posicionEquipo; i < cantidadEquipos - 1; i++) {
+            equipos[i] = equipos[i+1];
+        }
+        cantidadEquipos--;
+        cout << "Equipo eliminado correctamente." << endl;
+    } else {
+        cout << "Posicion invalida. No se elimino ningun equipo." << endl;
+    }
+}
+
+Team Conference::getEquipo(int posicionEquipo) {
+    if (posicionEquipo >= 0 && posicionEquipo < cantidadEquipos) {
+        return equipos[posicionEquipo];
+    } else {
+        cout << "Posicion invalida. Se devuelve un equipo vacio." << endl;
+        return Team();
+    }
+}
+
+int Conference::getCantidadEquipos() {
+    return cantidadEquipos;
+}
+
+void Conference::agregarJugadorEnEquipo(int posicionEquipo, Player jugador) {
+    if (posicionEquipo >= 0 && posicionEquipo < cantidadEquipos) {
+        equipos[posicionEquipo].agregarJugador(jugador);
+    } else {
+        cout << "Posicion de equipo invalida. No se agrego el jugador." << endl;
+    }
+}
+
+void Conference::eliminarJugadorEnEquipo(int posicionEquipo, int posicionJugador) {
+    if (posicionEquipo >= 0 && posicionEquipo < cantidadEquipos) {
+        equipos[posicionEquipo].eliminarJugador(posicionJugador);
+    } else {
+        cout << "Posicion de equipo invalida. No se elimino el jugador." << endl;
+    }
+}
+
+string Conference::toString() {
+    string info = "Conferencia: " + nombre + " Region: " + region + "\n";
+    if (cantidadEquipos == 0) {
+        info += "No hay equipos registrados.\n";
+    } else {
+        info += "Equipos:\n";
+        for (int i = 0; i < cantidadEquipos; i++) {
+            info += equipos[i].toString() + "\n";
         }
     }
-    return false;
+    return info;
 }
 
-int Conference::getTeamsCount() {
-    return teamsCount;
+// Conferencia del este
+
+EastConference::EastConference() : Conference() {
+    idConferencia = 0;
+    maxEquipos = 15;
 }
 
-Team Conference::getTeamAt(int idx) {
-    if (idx < 0 || idx >= teamsCount) return Team();
-    return teams[idx];
+EastConference::EastConference(string n, string r, int id, int max) : Conference(n, r) {
+    idConferencia = id;
+    maxEquipos = max;
 }
 
-void Conference::showInfo() {
-    cout << "Conferencia: " << name << " (" << region << ")" << endl;
-    cout << "Equipos (" << teamsCount << "):" << endl;
-    for (int i = 0; i < teamsCount; i++) {
-        cout << " - " << teams[i].getTeamName() << endl;
-    }
+int EastConference::getIdConferencia() {
+    return idConferencia;
 }
 
-//Conferencia del este
-EastConference::EastConference() : Conference("Conferencia del este", "Este") {
-    conferenceId = 0;
-    maxTeams = 100;
+void EastConference::setIdConferencia(int id) {
+    idConferencia = id;
 }
 
-EastConference::EastConference(int id, int maxT) : Conference("Conferencia del este", "Este") {
-    conferenceId = id;
-    maxTeams = maxT;
+int EastConference::getMaxEquipos() {
+    return maxEquipos;
 }
 
-void EastConference::setConferenceId(int id) {
-    conferenceId = id;
+void EastConference::setMaxEquipos(int m) {
+    maxEquipos = m;
 }
 
-int EastConference::getConferenceId() {
-    return conferenceId;
+// Conferencia del oeste
+
+WestConference::WestConference() : Conference() {
+    idConferencia = 0;
+    maxEquipos = 15;
 }
 
-void EastConference::setMaxTeams(int m) {
-    maxTeams = m;
+WestConference::WestConference(string n, string r, int id, int max) : Conference(n, r) {
+    idConferencia = id;
+    maxEquipos = max;
 }
 
-int EastConference::getMaxTeams() {
-    return maxTeams;
+int WestConference::getIdConferencia() {
+    return idConferencia;
 }
 
-void EastConference::showInfo() {
-    cout << "ID conferencia del este: " << conferenceId << " Equipos maximos: " << maxTeams << endl;
-    Conference::showInfo();
+void WestConference::setIdConferencia(int id) {
+    idConferencia = id;
 }
 
-//Conferencia del oeste
-WestConference::WestConference() : Conference("Conferencia del oeste", "Oeste") {
-    conferenceId = 0;
-    maxTeams = 100;
+int WestConference::getMaxEquipos() {
+    return maxEquipos;
 }
 
-WestConference::WestConference(int id, int maxT) : Conference("Conferencia del oeste", "Oeste") {
-    conferenceId = id;
-    maxTeams = maxT;
+void WestConference::setMaxEquipos(int m) {
+    maxEquipos = m;
 }
 
-void WestConference::setConferenceId(int id) {
-    conferenceId = id;
-}
-
-int WestConference::getConferenceId() {
-    return conferenceId;
-}
-
-void WestConference::setMaxTeams(int m) {
-    maxTeams = m;
-}
-
-int WestConference::getMaxTeams() {
-    return maxTeams;
-}
-
-void WestConference::showInfo() {
-    cout << "ID conferencia del oeste: " << conferenceId << " Equipos maximos: " << maxTeams << endl;
-    Conference::showInfo();
-}
-
-#endif // CONFERENCE_H
+#endif

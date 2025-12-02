@@ -1,138 +1,139 @@
 #ifndef TEAM_H
 #define TEAM_H
 
-#include <iostream>
-#include <string>
-
-using namespace std;
-
 #include "Person.h"
 #include "Ball.h"
 
 class Team {
 private:
-    string teamName;
-    string city;
-    Player players[100];
-    int playersCount;
+    string nombreEquipo;
+    string ciudad;
+    Player jugadores[10];
+    int cantidadJugadores;
     Coach coach;
-    bool hasCoach;
-    Ball ball; // composición: ball vive dentro del team
-
+    Ball balon;
 public:
     Team();
-    Team(string n, string c, string ballBrand, string ballColor, float ballSize);
-
-    void setTeamName(string n);
-    string getTeamName();
-    void setCity(string c);
-    string getCity();
-
-    bool addPlayer(Player p); // agrega por copia
-    bool removePlayerByNumber(int number);
-    int getPlayersCount();
-    void showPlayers();
-
-    void setCoach(Coach c); // coach se asigna por copia
-    bool teamHasCoach();
+    Team(string n, string c, Coach co, Ball b);
+    string getNombreEquipo();
+    void setNombreEquipo(string n);
+    string getCiudad();
+    void setCiudad(string c);
+    void agregarJugador(Player p);
+    void eliminarJugador(int posicionJugador);
+    int getCantidadJugadores();
+    void setCoach(Coach c);
     Coach getCoach();
-
-    void setBall(Ball b);
-    Ball getBall();
-
-    void showInfo();
+    void setBalon(Ball b);
+    Ball getBalon();
+    string toString();
 };
 
-//Métodos
+// Métodos
 
 Team::Team() {
-    teamName = "";
-    city = "";
-    playersCount = 0;
-    hasCoach = false;
-    ball = Ball("Generico", "Blanco", 7.0f);
+    nombreEquipo = "Sin nombre";
+    ciudad = "Sin ciudad";
+    cantidadJugadores = 0;
 }
 
-Team::Team(string n, string c, string ballBrand, string ballColor, float ballSize) {
-    teamName = n;
-    city = c;
-    playersCount = 0;
-    hasCoach = false;
-    ball = Ball(ballBrand, ballColor, ballSize);
+Team::Team(string n, string c, Coach co, Ball b) {
+    if (n != "") {
+        nombreEquipo = n;
+    } else {
+        nombreEquipo = "Sin nombre";
+    }
+
+    if (c != "") {
+        ciudad = c;
+    } else {
+        ciudad = "Sin ciudad";
+    }
+
+    coach = co;
+    balon = b;
+    cantidadJugadores = 0;
 }
 
-void Team::setTeamName(string n) {
-    teamName = n;
+string Team::getNombreEquipo() {
+    return nombreEquipo;
 }
 
-string Team::getTeamName() {
-    return teamName;
+void Team::setNombreEquipo(string n) {
+    if (n != "") {
+        nombreEquipo = n;
+    } else {
+        nombreEquipo = "Sin nombre";
+    }
 }
 
-void Team::setCity(string c) {
-    city = c;
+string Team::getCiudad() {
+    return ciudad;
 }
 
-string Team::getCity() {
-    return city;
+void Team::setCiudad(string c) {
+    if (c != "") {
+        ciudad = c;
+    } else {
+        ciudad = "Sin ciudad";
+    }
 }
 
-bool Team::addPlayer(Player p) {
-    if (playersCount >= 100) return false;
-    players[playersCount] = p;
-    playersCount++;
-    return true;
+void Team::agregarJugador(Player p) {
+    if (cantidadJugadores < 10) {
+        jugadores[cantidadJugadores] = p;
+        cantidadJugadores++;
+    } else {
+        cout << "No se pueden agregar mas jugadores. Limite alcanzado (10)." << endl;
+    }
 }
 
-bool Team::removePlayerByNumber(int number) {
-    for (int i = 0; i < playersCount; i++) {
-        if (players[i].getNumber() == number) {
-            for (int j = i; j < playersCount - 1; j++) players[j] = players[j+1];
-            playersCount--;
-            return true;
+void Team::eliminarJugador(int posicionJugador) {
+    if (posicionJugador >= 0 && posicionJugador < cantidadJugadores) {
+        for (int i = posicionJugador; i < cantidadJugadores - 1; i++) {
+            jugadores[i] = jugadores[i+1];
         }
+        cantidadJugadores--;
+        cout << "Jugador eliminado correctamente." << endl;
+    } else {
+        cout << "Posicion invalida. No se elimino ningun jugador." << endl;
     }
-    return false;
 }
 
-int Team::getPlayersCount() {
-    return playersCount;
-}
-
-void Team::showPlayers() {
-    cout << "Jugadores de " << teamName << ":" << endl;
-    for (int i = 0; i < playersCount; i++) {
-        players[i].showInfo();
-    }
+int Team::getCantidadJugadores() {
+    return cantidadJugadores;
 }
 
 void Team::setCoach(Coach c) {
     coach = c;
-    hasCoach = true;
-}
-
-bool Team::teamHasCoach() {
-    return hasCoach;
 }
 
 Coach Team::getCoach() {
     return coach;
 }
 
-void Team::setBall(Ball b) {
-    ball = b;
+void Team::setBalon(Ball b) {
+    balon = b;
 }
 
-Ball Team::getBall() {
-    return ball;
+Ball Team::getBalon() {
+    return balon;
 }
 
-void Team::showInfo() {
-    cout << "Equipo: " << teamName << " (" << city << ")" << endl;
-    ball.showInfo();
-    if (hasCoach) coach.showInfo();
-    cout << "Jugadores (" << playersCount << "):" << endl;
-    for (int i = 0; i < playersCount; i++) players[i].showInfo();
+string Team::toString() {
+    string info = "Equipo: " + nombreEquipo + " Ciudad: " + ciudad + "\n";
+    info += "Entrenador: " + coach.toString() + "\n";
+    info += balon.toString() + "\n";
+
+    if (cantidadJugadores == 0) {
+        info += "No hay jugadores registrados.\n";
+    } else {
+        info += "Jugadores:\n";
+        for (int i = 0; i < cantidadJugadores; i++) {
+            info += " - " + jugadores[i].toString() + "\n";
+        }
+    }
+    return info;
 }
 
-#endif // TEAM_H
+#endif
