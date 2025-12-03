@@ -1,10 +1,13 @@
+// Evitan que el archivo de encabezado se incluya más de una vez
+// durante la compilación, evitando errores por redefiniciones.
 #ifndef BALL_H
 #define BALL_H
 
 #include <iostream>   // Librería estándar para entrada y salida (cout)
 using namespace std;  // Permite usar cout y string sin prefijo std::
 
-// Clase Ball: representa un balón de baloncesto
+// Clase Ball
+// Representa un balón de baloncesto con marca y tamaño
 class Ball {
 private:
     string marca;   // Marca del balón (ejemplo: Spalding, Molten)
@@ -17,15 +20,15 @@ public:
     float getTamano();              // Devuelve el tamaño del balón
     void setTamano(float t);        // Establece el tamaño del balón
     void rebotar();                 // Simula que el balón rebota (mensaje en consola)
-    string toString();              // Devuelve la información completa del balón en formato string
+    string toString();              // Devuelve info completa del balón en formato string
 };
 
-// ========================= IMPLEMENTACIÓN DE MÉTODOS =========================
+// IMPLEMENTACIÓN DE MÉTODOS
 
 // Constructor por defecto: inicializa con valores estándar
 Ball::Ball() {
-    marca = "Generica";   // Marca por defecto
-    tamano = 0.0f;        // Tamaño por defecto
+    marca = "Generica";   // Marca por defecto si no se especifica
+    tamano = 0.0f;        // Tamaño por defecto (sin valor válido)
 }
 
 // Constructor con parámetros: inicializa con marca y tamaño dados
@@ -51,7 +54,7 @@ string Ball::getMarca() {
 // Setter de la marca con validación
 void Ball::setMarca(string m) {
     if (m != "") {
-        marca = m;
+        marca = m;        // Asigna marca válida
     } else {
         marca = "Generica"; // Valor por defecto si está vacía
     }
@@ -65,20 +68,22 @@ float Ball::getTamano() {
 // Setter del tamaño con validación
 void Ball::setTamano(float t) {
     if (t > 0) {
-        tamano = t;
+        tamano = t;       // Asigna tamaño válido
     } else {
-        tamano = 0.0f; // Valor por defecto si es inválido
+        tamano = 0.0f;    // Valor por defecto si es inválido
     }
 }
 
 // Método que simula que el balón rebota
 void Ball::rebotar() {
-    cout << "El balon de marca " << marca << " rebota con fuerza!" << endl;
+    cout << "El balon de marca " << marca
+         << " rebota con fuerza!" << endl;
 }
 
 // Devuelve la información completa del balón en formato string
 string Ball::toString() {
-    return "Balon:  Marca " + marca + " Tamanio " + to_string(tamano);
+    return "Balon: Marca " + marca +
+           " Tamanio " + to_string(tamano);
 }
 
-#endif // Fin de Ball.h
+#endif // Cierra la protección contra múltiples inclusiones del archivo
