@@ -1,75 +1,84 @@
 #ifndef BALL_H
 #define BALL_H
 
-#include <iostream>
-using namespace std;
+#include <iostream>   // Librería estándar para entrada y salida (cout)
+using namespace std;  // Permite usar cout y string sin prefijo std::
 
+// Clase Ball: representa un balón de baloncesto
 class Ball {
 private:
-    string marca;
-    float tamano;
+    string marca;   // Marca del balón (ejemplo: Spalding, Molten)
+    float tamano;   // Tamaño del balón (ejemplo: 7.5)
 public:
-    Ball();
-    Ball(string m, float t);
-    string getMarca();
-    void setMarca(string m);
-    float getTamano();
-    void setTamano(float t);
-    void rebotar();
-    string toString();
+    Ball();                         // Constructor por defecto
+    Ball(string m, float t);        // Constructor con parámetros: marca y tamaño
+    string getMarca();              // Devuelve la marca del balón
+    void setMarca(string m);        // Establece la marca del balón
+    float getTamano();              // Devuelve el tamaño del balón
+    void setTamano(float t);        // Establece el tamaño del balón
+    void rebotar();                 // Simula que el balón rebota (mensaje en consola)
+    string toString();              // Devuelve la información completa del balón en formato string
 };
 
-// Métodos
+// ========================= IMPLEMENTACIÓN DE MÉTODOS =========================
 
+// Constructor por defecto: inicializa con valores estándar
 Ball::Ball() {
-    marca = "Generica";
-    tamano = 0.0f;
+    marca = "Generica";   // Marca por defecto
+    tamano = 0.0f;        // Tamaño por defecto
 }
 
+// Constructor con parámetros: inicializa con marca y tamaño dados
 Ball::Ball(string m, float t) {
     if (m != "") {
-        marca = m;
+        marca = m;        // Si la marca no está vacía, se asigna
     } else {
-        marca = "Generica";
+        marca = "Generica"; // Valor por defecto si está vacía
     }
 
     if (t > 0) {
-        tamano = t;
+        tamano = t;       // Si el tamaño es válido (>0), se asigna
     } else {
-        tamano = 0.0f;
+        tamano = 0.0f;    // Valor por defecto si es inválido
     }
 }
 
+// Getter de la marca del balón
 string Ball::getMarca() {
     return marca;
 }
 
+// Setter de la marca con validación
 void Ball::setMarca(string m) {
     if (m != "") {
         marca = m;
     } else {
-        marca = "Generica";
+        marca = "Generica"; // Valor por defecto si está vacía
     }
 }
 
+// Getter del tamaño del balón
 float Ball::getTamano() {
     return tamano;
 }
 
+// Setter del tamaño con validación
 void Ball::setTamano(float t) {
     if (t > 0) {
         tamano = t;
     } else {
-        tamano = 0.0f;
+        tamano = 0.0f; // Valor por defecto si es inválido
     }
 }
 
+// Método que simula que el balón rebota
 void Ball::rebotar() {
     cout << "El balon de marca " << marca << " rebota con fuerza!" << endl;
 }
 
+// Devuelve la información completa del balón en formato string
 string Ball::toString() {
     return "Balon:  Marca " + marca + " Tamanio " + to_string(tamano);
 }
 
-#endif
+#endif // Fin de Ball.h
