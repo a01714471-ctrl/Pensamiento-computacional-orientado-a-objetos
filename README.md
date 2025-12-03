@@ -29,7 +29,7 @@ El sistema permite modelar una liga con conferencias (Este y Oeste), equipos, ju
    - Agregar jugadores a un equipo (máximo 10 por equipo).  
    - Mostrar información de la liga, conferencias o equipos.  
    - Eliminar conferencias, equipos o jugadores según sea necesario.  
-4. Salir con la opción `9`.
+4. Salir con la opción 9.
 
 
 ##  Casos en los que no funciona
@@ -39,8 +39,8 @@ El programa tiene ciertas limitaciones y entradas inválidas que generan mensaje
 - Intentar agregar más de 15 equipos en una conferencia → muestra mensaje de límite alcanzado.  
 - Intentar agregar más de 10 jugadores en un equipo → muestra mensaje de límite alcanzado.  
 - Introducir posiciones inválidas (ejemplo: seleccionar conferencia inexistente) → devuelve mensajes de error y no realiza la acción.  
-- Introducir valores negativos en edad, experiencia o número → se corrigen automáticamente a `0`.  
-- Introducir cadenas vacías en nombre, ciudad, posición o especialidad → se reemplazan por valores por defecto como `"Sin nombre"`, `"Sin ciudad"`, `"Sin posicion"`, `"General"`.  
+- Introducir valores negativos en edad, experiencia o número → se corrigen automáticamente a 0.  
+- Introducir cadenas vacías en nombre, ciudad, posición o especialidad → se reemplazan por valores por defecto como "Sin nombre", "Sin ciudad", "Sin posicion", "General".  
 
 
 ## Ejecución del programa
@@ -54,7 +54,7 @@ Para compilar y ejecutar el programa desde la terminal, siga estos pasos:
    .\programa.exe
 
 ## Correciones
-A este prograam se le realizaron las siguientes modificaciones:
+A este programa se le realizaron las siguientes modificaciones:
   1. Utilizo el concepto de herencia en el diagrama de clases de manera adecuada, que pertenece a la sub-competencia de Toma de decisiones SICT0302A, el diagrama de clases puedes ser observado desde este repositorio.
   2. Utilizo el concepto de composición (o agreagación) en el diagrama de clases, que pertenece a la sub-competencia de Toma de decisiones SICT0302A, la corrección se puede observar directamente en el diagrama de clases, con los objetos de League, Conference y Team.
   3. Implemento las clases en c++ siguiendo el diseño del diagrama de clases en UML, que pertenece a la sub-competencia de Toma de decisiones SICT0302A, este cambio se puede observar en todo el proyecto.
