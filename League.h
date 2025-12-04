@@ -3,111 +3,140 @@
 #ifndef LEAGUE_H
 #define LEAGUE_H
 
-#include "Conference.h"   // Incluye la clase Conference, necesaria en League
+// Incluye la clase Conference, necesaria en League
+#include "Conference.h"
 
 // Clase League
 // Representa una liga de baloncesto que contiene conferencias
 class League {
 private:
-    string nombreLiga;            // Nombre de la liga (ejemplo: NBA)
-    int anio;                     // Año de la liga (ejemplo: 2025)
-    Conference conferencias[2];   // Arreglo fijo de máximo 2 conferencias
-    int cantidadConferencias;     // Número actual de conferencias registradas
+    string nombreLiga;
+    int anio;
+    Conference conferencias[2];
+    int cantidadConferencias;
 
 public:
-    // Constructores
-    League();                     // Constructor por defecto
-    League(string nombre, int a); // Constructor con parámetros: nombre y año
+    League();
+    League(string nombre, int a);
 
-    // Métodos getter y setter para atributos básicos
-    string getNombreLiga();       // Devuelve el nombre de la liga
-    void setNombreLiga(string nombre); // Establece el nombre de la liga
-    int getAnio();                // Devuelve el año de la liga
-    void setAnio(int a);          // Establece el año de la liga
+    string getNombreLiga();
+    void setNombreLiga(string nombre);
+    int getAnio();
+    void setAnio(int a);
 
-    // Métodos para manejar conferencias
-    void agregarConferencia(Conference c);             // Agrega conferencia
-    void eliminarConferencia(int posicionConferencia); // Elimina conferencia
-    Conference getConferencia(int posicionConferencia);// Devuelve conferencia
-    int getCantidadConferencias();                     // Devuelve cantidad
+    void agregarConferencia(Conference c);
+    void eliminarConferencia(int posicionConferencia);
+    Conference getConferencia(int posicionConferencia);
+    int getCantidadConferencias();
 
-    // Métodos para manejar equipos dentro de conferencias
-    void agregarEquipoEnConferencia(int posicionConf,
-                                    Team equipo); // Agrega equipo
-    void eliminarEquipoEnConferencia(int posicionConf,
-                                     int posicionEquipo); // Elimina equipo
+    void agregarEquipoEnConferencia(int posicionConf, Team equipo);
+    void eliminarEquipoEnConferencia(int posicionConf, int posicionEquipo);
 
-    // Métodos para manejar jugadores dentro de equipos
     void agregarJugadorEnEquipo(int posicionConf,
                                 int posicionEquipo,
-                                Player jugador); // Agrega jugador
+                                Player jugador);
     void eliminarJugadorEnEquipo(int posicionConf,
                                  int posicionEquipo,
-                                 int posicionJugador); // Elimina jugador
+                                 int posicionJugador);
 
-    // Método para mostrar toda la información de la liga
     string toString();
 };
 
 // IMPLEMENTACIÓN DE MÉTODOS
 
-// Constructor por defecto: inicializa con valores vacíos
+/**
+ * Constructor por defecto
+ *
+ * @param
+ * @return Objeto League con nombre "Sin nombre" y año 0
+ */
 League::League() {
-    nombreLiga = "Sin nombre";   // Nombre por defecto
-    anio = 0;                    // Año por defecto
-    cantidadConferencias = 0;    // No hay conferencias al inicio
+    nombreLiga = "Sin nombre";
+    anio = 0;
+    cantidadConferencias = 0;
 }
 
-// Constructor con parámetros: inicializa con nombre y año dados
+/**
+ * Constructor con parámetros
+ *
+ * @param nombre Nombre de la liga
+ * @param a Año de la liga
+ * @return Objeto League inicializado con valores dados
+ */
 League::League(string nombre, int a) {
     if (nombre != "") {
-        nombreLiga = nombre;     // Si el nombre no está vacío, se asigna
+        nombreLiga = nombre;
     } else {
-        nombreLiga = "Sin nombre"; // Valor por defecto si está vacío
+        nombreLiga = "Sin nombre";
     }
 
     if (a >= 0) {
-        anio = a;                // Año válido (>=0)
+        anio = a;
     } else {
-        anio = 0;                // Valor por defecto si es negativo
+        anio = 0;
     }
 
-    cantidadConferencias = 0;    // Al inicio no hay conferencias
+    cantidadConferencias = 0;
 }
 
-// Getter del nombre de la liga
+/**
+ * Devuelve el nombre de la liga
+ *
+ * @param
+ * @return Nombre de la liga
+ */
 string League::getNombreLiga() {
     return nombreLiga;
 }
 
-// Setter del nombre de la liga con validación
+/**
+ * Establece el nombre de la liga con validación
+ *
+ * @param nombre Nombre de la liga
+ * @return
+ */
 void League::setNombreLiga(string nombre) {
     if (nombre != "") {
         nombreLiga = nombre;
     } else {
-        nombreLiga = "Sin nombre"; // Valor por defecto si está vacío
+        nombreLiga = "Sin nombre";
     }
 }
 
-// Getter del año de la liga
+/**
+ * Devuelve el año de la liga
+ *
+ * @param
+ * @return Año de la liga
+ */
 int League::getAnio() {
     return anio;
 }
 
-// Setter del año de la liga con validación
+/**
+ * Establece el año de la liga con validación
+ *
+ * @param a Año de la liga
+ * @return
+ */
 void League::setAnio(int a) {
     if (a >= 0) {
         anio = a;
     } else {
-        anio = 0; // Valor por defecto si es negativo
+        anio = 0;
     }
 }
 
-// Agregar una conferencia a la liga
+/**
+ * Agrega una conferencia a la liga
+ *
+ * @param c Objeto Conference a agregar
+ * @return
+ */
 void League::agregarConferencia(Conference c) {
-    if (cantidadConferencias < 2) { // Máximo 2 conferencias
-        conferencias[cantidadConferencias] = c; // Se guarda en el arreglo
-        cantidadConferencias++;                 // Se incrementa el contador
+    if (cantidadConferencias < 2) {
+        conferencias[cantidadConferencias] = c;
+        cantidadConferencias++;
         cout << "Conferencia agregada correctamente." << endl;
     } else {
         cout << "No se pueden agregar mas conferencias. "
@@ -115,15 +144,20 @@ void League::agregarConferencia(Conference c) {
     }
 }
 
-// Eliminar una conferencia por posición
+/**
+ * Elimina una conferencia por posición
+ *
+ * @param posicionConferencia Índice de la conferencia a eliminar
+ * @return
+ */
 void League::eliminarConferencia(int posicionConferencia) {
     if (posicionConferencia >= 0 &&
         posicionConferencia < cantidadConferencias) {
-        // Se recorre el arreglo para "compactar" las conferencias
-        for (int i = posicionConferencia; i < cantidadConferencias - 1; i++) {
+        for (int i = posicionConferencia;
+             i < cantidadConferencias - 1; i++) {
             conferencias[i] = conferencias[i + 1];
         }
-        cantidadConferencias--; // Se reduce el contador
+        cantidadConferencias--;
         cout << "Conferencia eliminada correctamente." << endl;
     } else {
         cout << "Posicion invalida. No se elimino ninguna conferencia."
@@ -131,24 +165,40 @@ void League::eliminarConferencia(int posicionConferencia) {
     }
 }
 
-// Obtener una conferencia por posición
+/**
+ * Devuelve una conferencia por posición
+ *
+ * @param posicionConferencia Índice de la conferencia
+ * @return Objeto Conference válido o vacío si la posición es inválida
+ */
 Conference League::getConferencia(int posicionConferencia) {
     if (posicionConferencia >= 0 &&
         posicionConferencia < cantidadConferencias) {
-        return conferencias[posicionConferencia]; // Devuelve conferencia válida
+        return conferencias[posicionConferencia];
     } else {
         cout << "Posicion invalida. Se devuelve una conferencia vacia."
              << endl;
-        return Conference(); // Devuelve conferencia vacía si posición inválida
+        return Conference();
     }
 }
 
-// Obtener la cantidad de conferencias registradas
+/**
+ * Devuelve la cantidad de conferencias registradas
+ *
+ * @param
+ * @return Número de conferencias
+ */
 int League::getCantidadConferencias() {
     return cantidadConferencias;
 }
 
-// Agregar un equipo dentro de una conferencia
+/**
+ * Agrega un equipo dentro de una conferencia
+ *
+ * @param posicionConf Índice de la conferencia
+ * @param equipo Objeto Team a agregar
+ * @return
+ */
 void League::agregarEquipoEnConferencia(int posicionConf, Team equipo) {
     if (posicionConf >= 0 && posicionConf < cantidadConferencias) {
         conferencias[posicionConf].agregarEquipo(equipo);
@@ -158,8 +208,15 @@ void League::agregarEquipoEnConferencia(int posicionConf, Team equipo) {
     }
 }
 
-// Eliminar un equipo dentro de una conferencia
-void League::eliminarEquipoEnConferencia(int posicionConf, int posicionEquipo) {
+/**
+ * Elimina un equipo dentro de una conferencia
+ *
+ * @param posicionConf Índice de la conferencia
+ * @param posicionEquipo Índice del equipo
+ * @return
+ */
+void League::eliminarEquipoEnConferencia(int posicionConf,
+                                         int posicionEquipo) {
     if (posicionConf >= 0 && posicionConf < cantidadConferencias) {
         conferencias[posicionConf].eliminarEquipo(posicionEquipo);
     } else {
@@ -168,7 +225,14 @@ void League::eliminarEquipoEnConferencia(int posicionConf, int posicionEquipo) {
     }
 }
 
-// Agregar un jugador dentro de un equipo
+/**
+ * Agrega un jugador dentro de un equipo
+ *
+ * @param posicionConf Índice de la conferencia
+ * @param posicionEquipo Índice del equipo
+ * @param jugador Objeto Player a agregar
+ * @return
+ */
 void League::agregarJugadorEnEquipo(int posicionConf,
                                     int posicionEquipo,
                                     Player jugador) {
@@ -181,7 +245,14 @@ void League::agregarJugadorEnEquipo(int posicionConf,
     }
 }
 
-// Eliminar un jugador dentro de un equipo
+/**
+ * Elimina un jugador dentro de un equipo
+ *
+ * @param posicionConf Índice de la conferencia
+ * @param posicionEquipo Índice del equipo
+ * @param posicionJugador Índice del jugador
+ * @return
+ */
 void League::eliminarJugadorEnEquipo(int posicionConf,
                                      int posicionEquipo,
                                      int posicionJugador) {
@@ -194,7 +265,12 @@ void League::eliminarJugadorEnEquipo(int posicionConf,
     }
 }
 
-// Mostrar toda la información de la liga en formato string
+/**
+ * Devuelve toda la información de la liga en formato string
+ *
+ * @param
+ * @return Cadena con la información completa de la liga
+ */
 string League::toString() {
     string info = "Liga: " + nombreLiga +
                   " Anio: " + to_string(anio) + "\n";
@@ -202,12 +278,11 @@ string League::toString() {
         info += "No hay conferencias registradas.\n";
     } else {
         info += "Conferencias:\n";
-        // Se recorre el arreglo de conferencias y se concatena su información
         for (int i = 0; i < cantidadConferencias; i++) {
             info += conferencias[i].toString() + "\n";
         }
     }
-    return info; // Devuelve la información completa de la liga
+    return info;
 }
 
-#endif // // Cierra la protección contra múltiples inclusiones del archivo
+#endif // Cierra la protección contra múltiples inclusiones del archivo

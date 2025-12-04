@@ -13,101 +13,135 @@ protected:
     string nombre;   // Nombre de la persona
     int edad;        // Edad de la persona
 public:
-    Person();                        // Constructor por defecto
-    Person(string n, int e);         // Constructor con parámetros: nombre y edad
-    string getNombre();              // Devuelve el nombre
-    void setNombre(string n);        // Establece el nombre
-    int getEdad();                   // Devuelve la edad
-    void setEdad(int e);             // Establece la edad
-    string toString();               // Devuelve info completa en formato string
+    Person();
+    Person(string n, int e);
+    string getNombre();
+    void setNombre(string n);
+    int getEdad();
+    void setEdad(int e);
+    string toString();
 };
 
 // Clase Player
 // Hereda de Person y representa a un jugador de baloncesto
 class Player : public Person {
 private:
-    string posicion;   // Posición del jugador (ejemplo: Base, Alero, Pivot)
-    int numero;        // Número de camiseta
+    string posicion;
+    int numero;
 public:
-    Player();                                      // Constructor por defecto
-    Player(string n, int e, string pos, int num);  // Constructor con parámetros
-    string getPosicion();                          // Devuelve la posición
-    void setPosicion(string p);                    // Establece la posición
-    int getNumero();                               // Devuelve el número de camiseta
-    void setNumero(int n);                         // Establece el número de camiseta
-    string toString();                             // Devuelve info completa del jugador
+    Player();
+    Player(string n, int e, string pos, int num);
+    string getPosicion();
+    void setPosicion(string p);
+    int getNumero();
+    void setNumero(int n);
+    string toString();
 };
 
 // Clase Coach
 // Hereda de Person y representa a un entrenador
 class Coach : public Person {
 private:
-    int aniosExperiencia;   // Años de experiencia del entrenador
-    string especialidad;    // Especialidad (ejemplo: Ofensiva, Defensiva)
+    int aniosExperiencia;
+    string especialidad;
 public:
-    Coach();                                      // Constructor por defecto
-    Coach(string n, int e, int exp, string esp);  // Constructor con parámetros
-    int getAniosExperiencia();                    // Devuelve años de experiencia
-    void setAniosExperiencia(int a);              // Establece años de experiencia
-    string getEspecialidad();                     // Devuelve la especialidad
-    void setEspecialidad(string s);               // Establece la especialidad
-    string toString();                            // Devuelve info completa del entrenador
+    Coach();
+    Coach(string n, int e, int exp, string esp);
+    int getAniosExperiencia();
+    void setAniosExperiencia(int a);
+    string getEspecialidad();
+    void setEspecialidad(string s);
+    string toString();
 };
 
 // IMPLEMENTACIÓN DE MÉTODOS
 
-// Person
-
-// Constructor por defecto: inicializa con valores genéricos
+/**
+ * Constructor por defecto
+ *
+ * @param
+ * @return Objeto Person con nombre "Desconocido" y edad 0
+ */
 Person::Person() {
-    nombre = "Desconocido";   // Nombre por defecto
-    edad = 0;                 // Edad por defecto
+    nombre = "Desconocido";
+    edad = 0;
 }
 
-// Constructor con parámetros: valida entradas
+/**
+ * Constructor con parámetros
+ *
+ * @param n Nombre de la persona
+ * @param e Edad de la persona
+ * @return Objeto Person inicializado con valores dados
+ */
 Person::Person(string n, int e) {
     if (n != "") {
-        nombre = n;           // Asigna nombre válido
+        nombre = n;
     } else {
-        nombre = "Desconocido"; // Valor por defecto
+        nombre = "Desconocido";
     }
 
     if (e >= 0) {
-        edad = e;             // Asigna edad válida
+        edad = e;
     } else {
-        edad = 0;             // Valor por defecto
+        edad = 0;
     }
 }
 
-// Getter del nombre
+/**
+ * Devuelve el nombre de la persona
+ *
+ * @param
+ * @return Nombre de la persona
+ */
 string Person::getNombre() {
     return nombre;
 }
 
-// Setter del nombre con validación
+/**
+ * Establece el nombre de la persona con validación
+ *
+ * @param n Nombre de la persona
+ * @return
+ */
 void Person::setNombre(string n) {
     if (n != "") {
         nombre = n;
     } else {
-        nombre = "Desconocido"; // Valor por defecto
+        nombre = "Desconocido";
     }
 }
 
-// Getter de la edad
+/**
+ * Devuelve la edad de la persona
+ *
+ * @param
+ * @return Edad de la persona
+ */
 int Person::getEdad() {
     return edad;
 }
 
-// Setter de la edad con validación
+/**
+ * Establece la edad de la persona con validación
+ *
+ * @param e Edad de la persona
+ * @return
+ */
 void Person::setEdad(int e) {
     if (e >= 0) {
         edad = e;
     } else {
-        edad = 0; // Valor por defecto
+        edad = 0;
     }
 }
 
-// Devuelve la información completa de la persona
+/**
+ * Devuelve la información completa de la persona
+ *
+ * @param
+ * @return Cadena con nombre y edad
+ */
 string Person::toString() {
     return "Nombre: " + nombre +
            " Edad: " + to_string(edad);
@@ -115,56 +149,94 @@ string Person::toString() {
 
 // Player
 
-// Constructor por defecto: inicializa con valores genéricos
+/**
+ * Constructor por defecto
+ *
+ * @param
+ * @return Objeto Player con posición "Sin posicion" y número 0
+ */
 Player::Player() : Person() {
-    posicion = "Sin posicion";   // Posición por defecto
-    numero = 0;                  // Número por defecto
+    posicion = "Sin posicion";
+    numero = 0;
 }
 
-// Constructor con parámetros: valida entradas
+/**
+ * Constructor con parámetros
+ *
+ * @param n Nombre del jugador
+ * @param e Edad del jugador
+ * @param pos Posición del jugador
+ * @param num Número de camiseta
+ * @return Objeto Player inicializado con valores dados
+ */
 Player::Player(string n, int e, string pos, int num) : Person(n, e) {
     if (pos != "") {
-        posicion = pos;          // Asigna posición válida
+        posicion = pos;
     } else {
-        posicion = "Sin posicion"; // Valor por defecto
+        posicion = "Sin posicion";
     }
 
     if (num >= 0) {
-        numero = num;            // Asigna número válido
+        numero = num;
     } else {
-        numero = 0;              // Valor por defecto
+        numero = 0;
     }
 }
 
-// Getter de la posición
+/**
+ * Devuelve la posición del jugador
+ *
+ * @param
+ * @return Posición del jugador
+ */
 string Player::getPosicion() {
     return posicion;
 }
 
-// Setter de la posición con validación
+/**
+ * Establece la posición del jugador con validación
+ *
+ * @param p Posición del jugador
+ * @return
+ */
 void Player::setPosicion(string p) {
     if (p != "") {
         posicion = p;
     } else {
-        posicion = "Sin posicion"; // Valor por defecto
+        posicion = "Sin posicion";
     }
 }
 
-// Getter del número de camiseta
+/**
+ * Devuelve el número de camiseta del jugador
+ *
+ * @param
+ * @return Número de camiseta
+ */
 int Player::getNumero() {
     return numero;
 }
 
-// Setter del número con validación
+/**
+ * Establece el número de camiseta con validación
+ *
+ * @param n Número de camiseta
+ * @return
+ */
 void Player::setNumero(int n) {
     if (n >= 0) {
         numero = n;
     } else {
-        numero = 0; // Valor por defecto
+        numero = 0;
     }
 }
 
-// Devuelve la información completa del jugador
+/**
+ * Devuelve la información completa del jugador
+ *
+ * @param
+ * @return Cadena con nombre, edad, posición y número
+ */
 string Player::toString() {
     return Person::toString() +
            " Posicion: " + posicion +
@@ -173,56 +245,95 @@ string Player::toString() {
 
 // Coach
 
-// Constructor por defecto: inicializa con valores genéricos
+/**
+ * Constructor por defecto
+ *
+ * @param
+ * @return Objeto Coach con experiencia 0 y especialidad "General"
+ */
 Coach::Coach() : Person() {
-    aniosExperiencia = 0;     // Experiencia por defecto
-    especialidad = "General"; // Especialidad por defecto
+    aniosExperiencia = 0;
+    especialidad = "General";
 }
 
-// Constructor con parámetros: valida entradas
-Coach::Coach(string n, int e, int exp, string esp) : Person(n, e) {
+/**
+ * Constructor con parámetros
+ *
+ * @param n Nombre del entrenador
+ * @param e Edad del entrenador
+ * @param exp Años de experiencia
+ * @param esp Especialidad
+ * @return Objeto Coach inicializado con valores dados
+ */
+Coach::Coach(string n, int e, int exp, string esp)
+    : Person(n, e) {
     if (exp >= 0) {
-        aniosExperiencia = exp; // Asigna experiencia válida
+        aniosExperiencia = exp;
     } else {
-        aniosExperiencia = 0;   // Valor por defecto
+        aniosExperiencia = 0;
     }
 
     if (esp != "") {
-        especialidad = esp;     // Asigna especialidad válida
+        especialidad = esp;
     } else {
-        especialidad = "General"; // Valor por defecto
+        especialidad = "General";
     }
 }
 
-// Getter de años de experiencia
+/**
+ * Devuelve los años de experiencia del entrenador
+ *
+ * @param
+ * @return Años de experiencia
+ */
 int Coach::getAniosExperiencia() {
     return aniosExperiencia;
 }
 
-// Setter de años de experiencia con validación
+/**
+ * Establece los años de experiencia con validación
+ *
+ * @param a Años de experiencia
+ * @return
+ */
 void Coach::setAniosExperiencia(int a) {
     if (a >= 0) {
         aniosExperiencia = a;
     } else {
-        aniosExperiencia = 0; // Valor por defecto
+        aniosExperiencia = 0;
     }
 }
 
-// Getter de la especialidad
+/**
+ * Devuelve la especialidad del entrenador
+ *
+ * @param
+ * @return Especialidad
+ */
 string Coach::getEspecialidad() {
     return especialidad;
 }
 
-// Setter de la especialidad con validación
+/**
+ * Establece la especialidad del entrenador con validación
+ *
+ * @param s Especialidad
+ * @return
+ */
 void Coach::setEspecialidad(string s) {
     if (s != "") {
         especialidad = s;
     } else {
-        especialidad = "General"; // Valor por defecto
+        especialidad = "General";
     }
 }
 
-// Devuelve la información completa del entrenador
+/**
+ * Devuelve la información completa del entrenador
+ *
+ * @param
+ * @return Cadena con nombre, edad, experiencia y especialidad
+ */
 string Coach::toString() {
     return Person::toString() +
            " Experiencia: " + to_string(aniosExperiencia) +

@@ -14,73 +14,117 @@ private:
     float tamano;   // Tamaño del balón (ejemplo: 7.5)
 public:
     Ball();                         // Constructor por defecto
-    Ball(string m, float t);        // Constructor con parámetros: marca y tamaño
+    Ball(string m, float t);        // Constructor con parámetros: marca y
+                                    // tamaño
     string getMarca();              // Devuelve la marca del balón
     void setMarca(string m);        // Establece la marca del balón
     float getTamano();              // Devuelve el tamaño del balón
     void setTamano(float t);        // Establece el tamaño del balón
-    void rebotar();                 // Simula que el balón rebota (mensaje en consola)
-    string toString();              // Devuelve info completa del balón en formato string
+    void rebotar();                 // Simula que el balón rebota (mensaje en
+                                    // consola)
+    string toString();              // Devuelve info completa del balón en
+                                    // formato string
 };
 
 // IMPLEMENTACIÓN DE MÉTODOS
 
-// Constructor por defecto: inicializa con valores estándar
+/**
+ * Constructor por defecto
+ *
+ * @param
+ * @return Objeto Ball con marca "Generica" y tamaño 0.0
+ */
 Ball::Ball() {
     marca = "Generica";   // Marca por defecto si no se especifica
     tamano = 0.0f;        // Tamaño por defecto (sin valor válido)
 }
 
-// Constructor con parámetros: inicializa con marca y tamaño dados
+/**
+ * Constructor con parámetros
+ *
+ * @param m Marca del balón
+ * @param t Tamaño del balón
+ * @return Objeto Ball inicializado con valores dados
+ */
 Ball::Ball(string m, float t) {
     if (m != "") {
-        marca = m;        // Si la marca no está vacía, se asigna
+        marca = m;
     } else {
-        marca = "Generica"; // Valor por defecto si está vacía
+        marca = "Generica";
     }
 
     if (t > 0) {
-        tamano = t;       // Si el tamaño es válido (>0), se asigna
+        tamano = t;
     } else {
-        tamano = 0.0f;    // Valor por defecto si es inválido
+        tamano = 0.0f;
     }
 }
 
-// Getter de la marca del balón
+/**
+ * Devuelve la marca del balón
+ *
+ * @param
+ * @return Marca del balón
+ */
 string Ball::getMarca() {
     return marca;
 }
 
-// Setter de la marca con validación
+/**
+ * Establece la marca del balón con validación
+ *
+ * @param m Marca del balón
+ * @return
+ */
 void Ball::setMarca(string m) {
     if (m != "") {
-        marca = m;        // Asigna marca válida
+        marca = m;
     } else {
-        marca = "Generica"; // Valor por defecto si está vacía
+        marca = "Generica";
     }
 }
 
-// Getter del tamaño del balón
+/**
+ * Devuelve el tamaño del balón
+ *
+ * @param
+ * @return Tamaño del balón
+ */
 float Ball::getTamano() {
     return tamano;
 }
 
-// Setter del tamaño con validación
+/**
+ * Establece el tamaño del balón con validación
+ *
+ * @param t Tamaño del balón
+ * @return
+ */
 void Ball::setTamano(float t) {
     if (t > 0) {
-        tamano = t;       // Asigna tamaño válido
+        tamano = t;
     } else {
-        tamano = 0.0f;    // Valor por defecto si es inválido
+        tamano = 0.0f;
     }
 }
 
-// Método que simula que el balón rebota
+/**
+ * Simula que el balón rebota mostrando un mensaje en consola
+ *
+ * @param
+ * @return
+ */
 void Ball::rebotar() {
     cout << "El balon de marca " << marca
          << " rebota con fuerza!" << endl;
 }
 
-// Devuelve la información completa del balón en formato string
+/**
+ * Devuelve la información completa del balón en formato string
+ *
+ * @param
+ * @return Cadena con marca y tamaño del balón
+ */
 string Ball::toString() {
     return "Balon: Marca " + marca +
            " Tamanio " + to_string(tamano);

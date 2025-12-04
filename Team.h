@@ -10,31 +10,37 @@
 // Representa un equipo dentro de una conferencia
 class Team {
 private:
-    string nombreEquipo;       // Nombre del equipo (ejemplo: Lakers, Bulls)
-    string ciudad;             // Ciudad del equipo (ejemplo: Los Angeles)
-    Player jugadores[10];      // Arreglo fijo de jugadores (máximo 10 por equipo)
-    int cantidadJugadores;     // Número actual de jugadores registrados
-    Coach coach;               // Entrenador del equipo
-    Ball balon;                // Balón asociado al equipo
+    string nombreEquipo;
+    string ciudad;
+    Player jugadores[10];
+    int cantidadJugadores;
+    Coach coach;
+    Ball balon;
 public:
-    Team();                                        // Constructor por defecto
-    Team(string n, string c, Coach co, Ball b);    // Constructor con parámetros
-    string getNombreEquipo();                      // Devuelve el nombre del equipo
-    void setNombreEquipo(string n);                // Establece el nombre del equipo
-    string getCiudad();                            // Devuelve la ciudad del equipo
-    void setCiudad(string c);                      // Establece la ciudad del equipo
-    void agregarJugador(Player p);                 // Agrega un jugador al equipo
-    void eliminarJugador(int posicionJugador);     // Elimina un jugador por posición
-    int getCantidadJugadores();                    // Devuelve la cantidad de jugadores
-    void setCoach(Coach c);                        // Establece el entrenador
-    Coach getCoach();                              // Devuelve el entrenador
-    void setBalon(Ball b);                         // Establece el balón
-    Ball getBalon();                               // Devuelve el balón
-    string toString();                             // Devuelve info completa del equipo
+    Team();
+    Team(string n, string c, Coach co, Ball b);
+    string getNombreEquipo();
+    void setNombreEquipo(string n);
+    string getCiudad();
+    void setCiudad(string c);
+    void agregarJugador(Player p);
+    void eliminarJugador(int posicionJugador);
+    int getCantidadJugadores();
+    void setCoach(Coach c);
+    Coach getCoach();
+    void setBalon(Ball b);
+    Ball getBalon();
+    string toString();
 };
 
 // IMPLEMENTACIÓN DE MÉTODOS
 
+/**
+ * Constructor por defecto
+ *
+ * @param
+ * @return Objeto Team con nombre "Sin nombre", ciudad "Sin ciudad" y 0 jugadores
+ */
 // Constructor por defecto: inicializa con valores genéricos
 Team::Team() {
     nombreEquipo = "Sin nombre";   // Nombre por defecto
@@ -42,6 +48,15 @@ Team::Team() {
     cantidadJugadores = 0;         // No hay jugadores al inicio
 }
 
+/**
+ * Constructor con parámetros
+ *
+ * @param n Nombre del equipo
+ * @param c Ciudad del equipo
+ * @param co Entrenador del equipo (Coach)
+ * @param b Balón asociado (Ball)
+ * @return Objeto Team inicializado con los valores dados y 0 jugadores
+ */
 // Constructor con parámetros: inicializa con nombre, ciudad, entrenador y balón
 Team::Team(string n, string c, Coach co, Ball b) {
     if (n != "") {
@@ -61,11 +76,23 @@ Team::Team(string n, string c, Coach co, Ball b) {
     cantidadJugadores = 0;         // Al inicio no hay jugadores
 }
 
+/**
+ * Devuelve el nombre del equipo
+ *
+ * @param
+ * @return Nombre del equipo
+ */
 // Getter del nombre del equipo
 string Team::getNombreEquipo() {
     return nombreEquipo;
 }
 
+/**
+ * Establece el nombre del equipo con validación
+ *
+ * @param n Nombre del equipo
+ * @return
+ */
 // Setter del nombre del equipo con validación
 void Team::setNombreEquipo(string n) {
     if (n != "") {
@@ -75,11 +102,23 @@ void Team::setNombreEquipo(string n) {
     }
 }
 
+/**
+ * Devuelve la ciudad del equipo
+ *
+ * @param
+ * @return Ciudad del equipo
+ */
 // Getter de la ciudad del equipo
 string Team::getCiudad() {
     return ciudad;
 }
 
+/**
+ * Establece la ciudad del equipo con validación
+ *
+ * @param c Ciudad del equipo
+ * @return
+ */
 // Setter de la ciudad con validación
 void Team::setCiudad(string c) {
     if (c != "") {
@@ -89,6 +128,12 @@ void Team::setCiudad(string c) {
     }
 }
 
+/**
+ * Agrega un jugador al equipo
+ *
+ * @param p Objeto Player a agregar
+ * @return
+ */
 // Agregar un jugador al equipo
 void Team::agregarJugador(Player p) {
     if (cantidadJugadores < 10) { // Máximo 10 jugadores
@@ -100,6 +145,12 @@ void Team::agregarJugador(Player p) {
     }
 }
 
+/**
+ * Elimina un jugador por posición
+ *
+ * @param posicionJugador Índice del jugador a eliminar
+ * @return
+ */
 // Eliminar un jugador por posición
 void Team::eliminarJugador(int posicionJugador) {
     if (posicionJugador >= 0 && posicionJugador < cantidadJugadores) {
@@ -114,31 +165,67 @@ void Team::eliminarJugador(int posicionJugador) {
     }
 }
 
+/**
+ * Devuelve la cantidad de jugadores registrados
+ *
+ * @param
+ * @return Número actual de jugadores del equipo
+ */
 // Obtener la cantidad de jugadores registrados
 int Team::getCantidadJugadores() {
     return cantidadJugadores;
 }
 
+/**
+ * Establece el entrenador del equipo
+ *
+ * @param c Objeto Coach
+ * @return
+ */
 // Setter del entrenador
 void Team::setCoach(Coach c) {
     coach = c;
 }
 
+/**
+ * Devuelve el entrenador del equipo
+ *
+ * @param
+ * @return Objeto Coach
+ */
 // Getter del entrenador
 Coach Team::getCoach() {
     return coach;
 }
 
+/**
+ * Establece el balón del equipo
+ *
+ * @param b Objeto Ball
+ * @return
+ */
 // Setter del balón
 void Team::setBalon(Ball b) {
     balon = b;
 }
 
+/**
+ * Devuelve el balón del equipo
+ *
+ * @param
+ * @return Objeto Ball
+ */
 // Getter del balón
 Ball Team::getBalon() {
     return balon;
 }
 
+/**
+ * Devuelve la información completa del equipo en formato string
+ *
+ * @param
+ * @return Cadena con nombre, ciudad, entrenador, balón y jugadores
+ */
 // Mostrar toda la información del equipo
 string Team::toString() {
     // Información básica del equipo
