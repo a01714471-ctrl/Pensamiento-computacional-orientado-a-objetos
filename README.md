@@ -62,7 +62,7 @@ El programa tiene ciertas limitaciones y entradas inválidas que generan mensaje
 ## Diagrama de clases
 Para visualizar el diagrama de clases, da clic abajo:
 
-[Diagrama de clases](./Diagrama de clases.png)
+[Diagrama de clases](./Diagramadeclases.png)
 
 
 ## Ejecución del programa
