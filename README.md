@@ -6,18 +6,20 @@ El sistema permite modelar una liga con conferencias (Este y Oeste), equipos, ju
 
 
 ##  ¿Para qué sirve?
-- Crear y administrar una liga de baloncesto ficticia.  
-- Agregar conferencias, equipos y jugadores con sus datos básicos.  
-- Mostrar la información completa de la liga, conferencias y equipos en formato textual.  
-- Eliminar conferencias, equipos y jugadores para mantener la estructura actualizada.  
-- Funciona como ejemplo académico de programación orientada a objetos en C++ (herencia, asociación, agregación, validaciones).
+-Simula una liga de baloncesto con conferencias (Este y Oeste), equipos y jugadores.
+-Permite crear conferencias con nombre, región y tipo (Este/Oeste).
+-Permite agregar equipos con ciudad, entrenador y balón asociado.
+-Permite agregar jugadores con nombre, edad, posición y número de camiseta.
+-Ofrece menús interactivos para mostrar la liga completa, una conferencia o un equipo específico.
+-Permite eliminar conferencias, equipos o jugadores de forma controlada.
+-Incluye validaciones de entrada para evitar datos vacíos, negativos o índices inválidos.
 
 
 ##  ¿Para qué no sirve?
-- No es un simulador deportivo real: no calcula estadísticas, partidos ni resultados.  
-- No maneja persistencia: los datos se pierden al cerrar el programa (no guarda en archivos ni bases de datos).  
-- No tiene interfaz gráfica: todo se maneja por consola.  
-- No valida entradas complejas: se asume que el usuario introduce datos correctos en formato esperado.  
+-No simula partidos ni calcula estadísticas deportivas.
+-No guarda datos en archivos ni en bases de datos (la información se pierde al cerrar el programa).
+-No tiene interfaz gráfica: funciona únicamente en consola.
+-No está diseñado para uso profesional en gestión de ligas deportivas, solo como proyecto académico.
 
 
 ## Cómo se usa
@@ -35,12 +37,28 @@ El sistema permite modelar una liga con conferencias (Este y Oeste), equipos, ju
 ##  Casos en los que no funciona
 El programa tiene ciertas limitaciones y entradas inválidas que generan mensajes de error o comportamiento restringido:
 
-- Intentar agregar más de 2 conferencias → muestra mensaje de límite alcanzado.  
-- Intentar agregar más de 15 equipos en una conferencia → muestra mensaje de límite alcanzado.  
-- Intentar agregar más de 10 jugadores en un equipo → muestra mensaje de límite alcanzado.  
-- Introducir posiciones inválidas (ejemplo: seleccionar conferencia inexistente) → devuelve mensajes de error y no realiza la acción.  
-- Introducir valores negativos en edad, experiencia o número → se corrigen automáticamente a 0.  
-- Introducir cadenas vacías en nombre, ciudad, posición o especialidad → se reemplazan por valores por defecto como "Sin nombre", "Sin ciudad", "Sin posicion", "General".  
+## ⚠️ Casos en los que no funciona
+- Conferencias:
+  - Intentar agregar más de 2 conferencias → se rechaza (límite máximo).
+  - Intentar mostrar o eliminar conferencias cuando no existen → se muestra mensaje y no pide índices.
+
+- Equipos:
+  - Intentar agregar más de 15 equipos en una conferencia → se rechaza (límite máximo).
+  - Intentar mostrar o eliminar equipos cuando la conferencia no tiene equipos → se muestra mensaje.
+  - Intentar agregar jugadores en una conferencia sin equipos → se muestra mensaje de error.
+
+- Jugadores:
+  - Intentar agregar más de 10 jugadores en un equipo → se rechaza (límite máximo).
+  - Intentar mostrar o eliminar jugadores cuando el equipo no tiene jugadores → se muestra mensaje.
+
+- Entradas inválidas:
+  - Índices fuera de rango (ejemplo: conferencia 5 cuando solo hay 2).
+  - Datos vacíos (nombre, ciudad, posición).
+  - Valores negativos o cero en edad, número de camiseta o tamaño del balón.
+
+- Entorno:
+  - Intentar usarlo fuera de consola (ejemplo: interfaz gráfica) → no funciona.
+
 
 
 ## Ejecución del programa
