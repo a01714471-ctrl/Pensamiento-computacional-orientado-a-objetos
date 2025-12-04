@@ -37,7 +37,7 @@ El sistema permite modelar una liga con conferencias (Este y Oeste), equipos, ju
 ##  Casos en los que no funciona
 El programa tiene ciertas limitaciones y entradas inválidas que generan mensajes de error o comportamiento restringido:
 
-## ⚠️ Casos en los que no funciona
+## Casos en los que no funciona
 - Conferencias:
   - Intentar agregar más de 2 conferencias → se rechaza (límite máximo).
   - Intentar mostrar o eliminar conferencias cuando no existen → se muestra mensaje y no pide índices.
