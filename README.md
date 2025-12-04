@@ -59,6 +59,10 @@ El programa tiene ciertas limitaciones y entradas inválidas que generan mensaje
 - Entorno:
   - Intentar usarlo fuera de consola (ejemplo: interfaz gráfica) → no funciona.
 
+## Diagrama de clases
+Para visualizar el diagrama de clases, da clic abajo:
+
+[Diagrama de clases](./Diagrama de clases.png)
 
 
 ## Ejecución del programa
